@@ -1,4 +1,4 @@
-name: Merge and Update cn-ip-subs.txt
+name: Merge and Update chnroute.txt
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           if [ -n "$(git status --porcelain)" ]; then
-            git add china-ip-list/chnroute.txt
+            git add chnroute.txt
             git commit -m "chore: update chnroute.txt with latest merged content"
             git push origin main
           else
