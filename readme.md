@@ -12,7 +12,7 @@ A Windows command-line tool for managing IP routes with support for batch operat
 
 ## Usage
 
-```bash
+```powershell
 win-route add <file1.txt> [file2.txt ...] default   # Add routes from files using default gateway
 win-route delete <file1.txt> [file2.txt ...]        # Delete routes from files
 win-route reset                                     # Reset routing table
@@ -20,9 +20,29 @@ win-route reset                                     # Reset routing table
 
 ## Route File Format
 
-```
+```plaintext
 1.0.1.0/24
 1.0.2.0/23
 1.0.8.0/21
 ...
+```
+
+## Example
+
+### Add default
+
+```powershell
+.\win-route.exe add .\custom.txt .\chnroute.txt default
+```
+
+### Remove routing table
+
+```powershell
+.\win-route.exe delete .\custom.txt .\chnroute.txt
+```
+
+### Reset by default
+
+```powershell
+.\win-route.exe reset
 ```
