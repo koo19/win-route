@@ -47,7 +47,7 @@ win-route reset                                     # Reset routing table
 .\win-route.exe reset
 ```
 
-### Compile
+## Compile
 
 ```powershell
 g++ main.cpp route_operations.cpp network_utils.cpp file_operations.cpp -o win-route.exe -liphlpapi -lws2_32
