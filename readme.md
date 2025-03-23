@@ -29,7 +29,7 @@ win-route reset                                     # Reset routing table
 
 ## Example
 
-### Add default
+### Add routing table via default gateway
 
 ```powershell
 .\win-route.exe add .\custom.txt .\chnroute.txt default
