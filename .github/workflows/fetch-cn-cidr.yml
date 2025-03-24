@@ -1,0 +1,40 @@
+name: Merge and Update chnroute.txt
+
+permissions:
+  contents: write
+
+on:
+  # 每小时运行一次
+  schedule:
+    - cron: '* * * * *'
+  # 支持手动触发
+  workflow_dispatch:
+
+jobs:
+  merge_and_update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v3
+        
+      # 签出远程仓库 mayaxcn/china-ip-list 到子目录 china-ip-list
+      - name: Checkout china-ip-list repository
+        uses: actions/checkout@v3
+        with:
+          repository: mayaxcn/china-ip-list
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./china-ip-list
+
+      # 若有更改，则提交并推送 cn-ip-subs.txt
+      - name: Commit and push changes
+        run: |
+          cp ./china-ip-list/chnroute.txt ./ip_segment_file/chnroute.txt
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add chnroute.txt
+            git commit -m "chore: update chnroute.txt with latest merged content"
+            git push origin main
+          else
+            echo "No changes detected, skipping commit."
+          fi
