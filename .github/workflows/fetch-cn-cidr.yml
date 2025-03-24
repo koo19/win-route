@@ -23,12 +23,12 @@ jobs:
         with:
           repository: mayaxcn/china-ip-list
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: china-ip-list
+          path: ./china-ip-list
 
       # 若有更改，则提交并推送 cn-ip-subs.txt
       - name: Commit and push changes
         run: |
-          cp china-ip-list/chnroute.txt ./chnroute.txt
+          cp ./china-ip-list/chnroute.txt ./ip_segment_file/chnroute.txt
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           if [ -n "$(git status --porcelain)" ]; then
